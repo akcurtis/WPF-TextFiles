@@ -21,6 +21,7 @@ namespace ReadingWritingTextFileApp
         private bool _isAlive;
         private bool _addUser = false;
         private bool _saveList;
+        private string _selectedPerson;
         private ObservableCollection<string> _textFile = new ObservableCollection<string>();
 
         #endregion // Fields
@@ -31,6 +32,20 @@ namespace ReadingWritingTextFileApp
         {
 
         }
+    
+        public string SelectedPerson
+        {
+            get { return _selectedPerson; }
+            set
+            {
+                if(_selectedPerson != value)
+                {
+                    _selectedPerson = value;
+                    OnPropertyChanged(nameof(_selectedPerson));
+                }
+            }
+        }
+
 
         public ObservableCollection<string> TextFile
         {
@@ -40,7 +55,7 @@ namespace ReadingWritingTextFileApp
                 if (_textFile != value)
                 {
                     _textFile = value;
-                    OnPropertyChanged("TextFile");
+                    OnPropertyChanged(nameof(TextFile));
                 }
             }
         }
@@ -54,7 +69,7 @@ namespace ReadingWritingTextFileApp
                 if (_fName != value)
                 {
                     _fName = value;
-                    OnPropertyChanged("FirstName");
+                    OnPropertyChanged(nameof(FirstName));
                 }
             }
         }
@@ -67,7 +82,7 @@ namespace ReadingWritingTextFileApp
                 if (_lName != value)
                 {
                     _lName = value;
-                    OnPropertyChanged("LastName");
+                    OnPropertyChanged(nameof(LastName));
                 }
             }
         }
@@ -89,7 +104,7 @@ namespace ReadingWritingTextFileApp
                 if (_age != value)
                 {
                     _age = value;
-                    OnPropertyChanged("Age");
+                    OnPropertyChanged(nameof(Age));
                 }
             }
         }
@@ -102,7 +117,7 @@ namespace ReadingWritingTextFileApp
                 if (_isAlive != value)
                 {
                     _isAlive = value;
-                    OnPropertyChanged("IsAlive");
+                    OnPropertyChanged(nameof(IsAlive));
                 }
             }
         }
@@ -156,10 +171,28 @@ namespace ReadingWritingTextFileApp
         {
             if (ValidateUserInput()) // check input valid before adding to list
             {
-                _textFile.Add((FirstName + " " + LastName + " " + Age + " " + IsAlive.ToString()));
+                _textFile.Add((FirstName + " " + LastName + " is " + Age + " and is " + IsAliveToText()));
+                MessageBox.Show("User Added");
                 ResetInput();
             }
+            else
+            {
+                MessageBox.Show("Not a valid User");
+            }
+        }
 
+        public string IsAliveToText()
+        {
+            return IsAlive ? "alive" : "dead";
+        }
+
+        public void DeleteUserFromList()
+        {
+            if(!string.IsNullOrEmpty(TextFile.ToString()))
+            {
+                TextFile.Remove(SelectedPerson);
+                MessageBox.Show("User Deleted");
+            }
         }
 
         public void ResetInput()
@@ -181,14 +214,18 @@ namespace ReadingWritingTextFileApp
                 sb.Append(Environment.NewLine);
             }
             File.WriteAllText("personFile.txt", x);
-            MessageBoxResult result = MessageBox.Show("File Saved");
+            MessageBox.Show("File Saved");
         }
 
-        // Validate User Input
 
         public bool ValidateUserInput()
         {
             // Error check for empty spaces(Trim) + length(string.Length()) 
+
+            // Age Check
+            if (Age <= 0 || Age > 100)
+                return false;
+
             return (FirstName != null && LastName != null && Age != null);
         }
 

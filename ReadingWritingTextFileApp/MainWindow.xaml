@@ -6,50 +6,103 @@
         xmlns:local="clr-namespace:ReadingWritingTextFileApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
 
+
+    <Grid>
+        <!-- Start Wrapper For App-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"></ColumnDefinition>
-            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="800"/>
         </Grid.ColumnDefinitions>
 
-        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="450"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="LightGray" Grid.Column="0" Grid.Row="0">
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type ListBox}">
+                    <Setter Property="Margin" Value="50 30 0 0"/>
+                </Style>
+
+                <!--<Style TargetType="{x:Type Label}">
+                    <Setter Property="Padding" Value="25 10 10 0"/>
+                </Style>-->
+            </Grid.Resources>
+            
+            
+            
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="400"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
 
-            <Label Name="FirstName" Content="First Name:" FontWeight="Bold" FontSize="16px" Grid.Row="0" Grid.Column="0"></Label>
-            <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"></TextBox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-            <Label Name="LastName" Content="Last Name:" FontWeight="Bold" FontSize="16px" Grid.Row="1" Grid.Column="0"></Label>
-            <TextBox Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></TextBox>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
 
-            <Label Name="Age" Content="Age:" FontWeight="Bold" FontSize="16px" Grid.Column="0" Grid.Row="2"></Label>
-            <TextBox Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"></TextBox>
+                <Label Name="Title" Content="Text File Challenge" FontSize="32px" Grid.Row="0" Padding="25 10 0 0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+
+                <Label Name="FirstName" Content="First Name:" FontSize="16px" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Padding="25 0 0 0"></Label>
+                <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Padding="0 5 0 0" Grid.Row="1" Grid.Column="1"></TextBox>
+
+                <Label Name="LastName" Content="Last Name:" FontSize="16px" Padding="25 0 0 0" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></Label>
+                <TextBox Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Padding="0 5 0 0" Grid.Row="2" Grid.Column="1"></TextBox>
+
+                <Label Name="Age" Content="Age:" FontSize="16px" Padding="25 0 0 0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"></Label>
+                <TextBox Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="0 5 0 0" Height="30" Grid.Row="3" Grid.Column="1"></TextBox>
 
 
-            <Label Name="IsAlive" Content="Is Alive:" FontWeight="Bold" FontSize="16px" Grid.Column="0" Grid.Row="3"></Label>
-            <CheckBox IsChecked="{Binding IsAlive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"></CheckBox>
+                <Label Name="IsAlive" Content="Is Alive:" FontSize="16px" Padding="25 0 0 0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4"></Label>
+                <CheckBox IsChecked="{Binding IsAlive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"></CheckBox>
 
-            <Button Name="AddUser" Content="Add User" Click="AddUser_Click"  Grid.Row="4" Grid.Column="1"></Button>
+                <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="25 5 0 5"/>
+                            </Style>
+                        </Grid.Resources>
 
-            <Button Name="SaveList" Content="Save List" Click="SaveList_Click"  Grid.Row="5" Grid.Column="1"></Button>
-            
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Name="AddUser" Content="Add User" Click="AddUser_Click" Height="40px" Width="325px" Grid.Column="0" Grid.Row="0"></Button>
+
+                        <Button Name="DeleteUser" Content="Delete User" Click="DeleteUser_Click" Height="40px" Width="325px" Grid.Column="0" Grid.Row="1"></Button>
+
+                        <Button Name="SaveList" Content="Save List" Click="SaveList_Click" Height="40px" Width="325px" Grid.Column="0" Grid.Row="2"></Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <ListBox ItemsSource="{Binding TextFile, Mode= TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPerson}" FontSize="14px" Grid.Column="1" Grid.Row="0"></ListBox>
+
         </Grid>
 
-        <ListBox ItemsSource="{Binding TextFile, Mode= TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Grid.RowSpan="1"></ListBox>
-
     </Grid>
+    <!-- End Wrapper For App-->
+
 </Window>

@@ -37,6 +37,11 @@ namespace ReadingWritingTextFileApp
         {
             p.AddUserToList();
         }
+
+        private void DeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            p.DeleteUserFromList();
+        }
     }
 }
 
